@@ -6,10 +6,10 @@ where artist= 'Frank Ocean';
 
 
 -- query2
-select region_name, round((count(region_name))/(select count(*) from region)*100, 2) persent
-from region
-group by region_name
-order by persent DESC , region_name;
+SELECT artist , round((COUNT(artist))/ (SELECT COUNT(*) FROM track)*100, 2)  persent                                                                                                             
+FROM track
+GROUP BY artist
+ORDER BY persent DESC, artist;
 
 
 
