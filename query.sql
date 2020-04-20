@@ -9,7 +9,7 @@ where artist= 'Frank Ocean';
 select region_name, round((count(region_name))/(select count(*) from region)*100, 2) persent
 from region
 group by region_name
-order by persent DESC , region_name
+order by persent DESC , region_name;
 
 
 
