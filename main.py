@@ -19,10 +19,9 @@ connection = cx_Oracle.connect(username, password, database)
 cursor = connection.cursor()
 
 cursor.execute(  """
-    select 
-    track_duration,
-    artist
-    from charts_view
+    select sum(track_duration) as all_playlist
+from track
+where artist= 'Frank Ocean'
     """)
 
 artist = []
@@ -66,12 +65,11 @@ fig = go.Figure(data=data, layout=layout)
 track_duration_artist = py.plot(fig, filename='duration-artist')
 
 cursor.execute( """
-   select distinct artist ,
-   round((COUNT(artist))/ (SELECT COUNT(*) FROM charts_view)*100, 2)  persent                                                                                                             
-FROM charts_view
+   SELECT artist , round((COUNT(artist))/ (SELECT COUNT(*) FROM track)*100, 2)  persent                                                                                                             
+FROM track
 GROUP BY artist
 ORDER BY persent DESC, artist
-""")
+   """)
 artist = []
 percent = []
 
@@ -89,7 +87,7 @@ artist_percent = py.plot([pie_data], filename='artist-percent')
 
 cursor.execute( """
    select charts_place, max(popularity) as  popular
-from charts_view
+from charts
 group by charts_place
 order by charts_place
 """)
