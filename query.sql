@@ -1,7 +1,6 @@
 -- query1 
-select sum(track_duration) as all_playlist
-from track
-where artist= 'Frank Ocean';
+   select distinct artist, track_duration
+from track;
 
 
 
