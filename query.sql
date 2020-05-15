@@ -1,14 +1,14 @@
 -- query1 
-   select distinct artist, track_duration
+select distinct artist, track_duration
 from track;
 
 
 
 -- query2
-SELECT artist , round((COUNT(artist))/ (SELECT COUNT(*) FROM track)*100, 2)  persent                                                                                                             
-FROM track
-GROUP BY artist
-ORDER BY persent DESC, artist;
+select artist , round((count(artist))/ (select count(*) from track)*100, 2)  persent                                                                                                             
+from track
+group by artist
+order by persent desc, artist;
 
 
 
