@@ -8,11 +8,10 @@ connection = cx_Oracle.connect(username, password, database)
 
 cursor = connection.cursor()
 
-print("Хронометраж Френка Оушена в чарті.\n")
+print("Хронометраж артистів у чарті в чарті.\n")
 query1 ="""
-   select sum(track_duration) as all_playlist
+select distinct artist, track_duration
 from track
-where artist= 'Frank Ocean'
 """
 cursor.execute(query1)
 
@@ -23,10 +22,10 @@ for row in cursor:
 
 print("Відсоток треків одного втконавця в чарті.\n")
 query2 = """
-SELECT artist , round((COUNT(artist))/ (SELECT COUNT(*) FROM track)*100, 2)  persent                                                                                                             
-FROM track
-GROUP BY artist
-ORDER BY persent DESC, artist
+select artist , round((count(artist))/ (select count(*) from track)*100, 2)  persent                                                                                                             
+from track
+group by artist
+order by persent desc, artist
 """
 cursor.execute(query2)
 
