@@ -64,10 +64,10 @@ fig = go.Figure(data=data, layout=layout)
 track_duration_artist = py.plot(fig, filename='duration -artist')
 
 cursor.execute( """
-select artist , round((count(artist))/ (select count(*) from track)*100, 2)  persent                                                                                                             
-from track
-group by artist
-order by persent desc, artist
+   SELECT artist , round((COUNT(artist))/ (SELECT COUNT(*) FROM track)*100, 2)  persent                                                                                                             
+FROM track
+GROUP BY artist
+ORDER BY persent DESC, artist
    """)
 artist = []
 percent = []
