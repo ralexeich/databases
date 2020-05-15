@@ -19,29 +19,28 @@ connection = cx_Oracle.connect(username, password, database)
 cursor = connection.cursor()
 
 cursor.execute(  """
-    select sum(track_duration) as all_playlist
+   select distinct artist, track_duration
 from track
-where artist= 'Frank Ocean'
-    """)
+""" )
 
 artist = []
 track_duration = []
 
 
 for row in cursor:
-    print("all_playlist:", row[0],"track_duration:",row[1])
-    track_duration += [row[0]]
-    artist += [row[1]]
+    print("artist:", row[0],"track_duration :",row[1])
+    track_duration += [row[1]]
+    artist += [row[0]]
 
 data = [go.Bar(
              x=artist,
-             y=track_duration
+             y=track_duration 
       )]
 
 layout = go.Layout(
     title = '',
     xaxis=dict(
-        title='track_duration',
+        title='track_duration ',
         titlefont=dict(
             family='Courier New, monospace',
             size=20,
@@ -62,7 +61,7 @@ layout = go.Layout(
 
 fig = go.Figure(data=data, layout=layout)
 
-track_duration_artist = py.plot(fig, filename='duration-artist')
+track_duration_artist = py.plot(fig, filename='duration -artist')
 
 cursor.execute( """
    SELECT artist , round((COUNT(artist))/ (SELECT COUNT(*) FROM track)*100, 2)  persent                                                                                                             
@@ -139,8 +138,11 @@ my_dboard.insert(box_1)
 my_dboard.insert(box_2, 'below', 1)
 my_dboard.insert(box_3, 'right', 2)
 
-py.dashboard_ops.upload(my_dboard, 'Billboard')
+py.dashboard_ops.upload(my_dboard, 'Billboard1')
 
 
 cursor.close()
 connection.close()
+
+
+
